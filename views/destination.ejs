@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 
-<!-- Destination Header -->
+<!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
         <div class="row align-items-center">
@@ -16,12 +16,12 @@
                     </ol>
                 </nav>
                 
-                <h1 class="display-4 fw-bold mb-3">
+                <h1 class="display-4 fw-bold mb-3 text-white">
                     <i class="bi bi-geo-alt me-3"></i>
                     <%= destination.name %>
                 </h1>
                 
-                <p class="lead mb-4">
+                <p class="lead mb-4 text-white">
                     <%= destination.description %>
                 </p>
                 
@@ -32,65 +32,63 @@
                     </span>
                     
                     <% if (destination.lat && destination.lng) { %>
-                        <span class="badge bg-light text-dark fs-6 px-3 py-2">
-                            <i class="bi bi-globe me-1"></i>
-                            <%= destination.lat.toFixed(4) %>, <%= destination.lng.toFixed(4) %>
-                        </span>
+                    <span class="badge bg-light text-dark fs-6 px-3 py-2">
+                        <i class="bi bi-globe me-1"></i>
+                        <%= destination.lat.toFixed(4) %>, <%= destination.lng.toFixed(4) %>
+                    </span>
                     <% } %>
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-4 mt-lg-0">
                 <% if (weather) { %>
-                    <div class="weather-card p-4 text-center">
-                        <h5 class="fw-bold mb-3">
-                            <i class="bi bi-thermometer-half me-2"></i>
-                            Current Weather
-                        </h5>
-                        
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <div class="display-6 fw-bold mb-1">
-                                    <%= weather.temperature %>°C
-                                </div>
-                                <div class="small text-capitalize">
-                                    <%= weather.description %>
-                                </div>
+                <div class="weather-card p-4 text-center">
+                    <h5 class="fw-bold mb-3 text-white">
+                        <i class="bi bi-thermometer-half me-2"></i>
+                        Current Weather
+                    </h5>
+                    
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="display-6 fw-bold mb-1 text-white">
+                                <%= weather.temperature %>°C
                             </div>
-                            
-                            <div class="col-6">
-                                <% if (weather.icon) { %>
-                                    <img src="https://openweathermap.org/img/wn/<%= weather.icon %>@2x.png" 
-                                         alt="Weather icon" 
-                                         class="mb-2"
-                                         style="width: 60px; height: 60px;">
-                                <% } %>
+                            <div class="small text-capitalize text-white">
+                                <%= weather.description %>
                             </div>
                         </div>
                         
-                        <div class="row g-3 mt-2 pt-3 border-top border-light">
-                            <div class="col-6">
-                                <i class="bi bi-droplet me-1"></i>
-                                <%= weather.humidity %>% humidity
-                            </div>
-                            <div class="col-6">
-                                <i class="bi bi-wind me-1"></i>
-                                <%= weather.windSpeed %> m/s
-                            </div>
+                        <div class="col-6">
+                            <% if (weather.icon) { %>
+                            <img src="https://openweathermap.org/img/wn/<%= weather.icon %>@2x.png" 
+                                 alt="Weather icon" 
+                                 class="weather-icon">
+                            <% } %>
                         </div>
                     </div>
+                    
+                    <div class="row g-3 mt-2 pt-3 border-top border-light">
+                        <div class="col-6 text-white">
+                            <i class="bi bi-droplet me-1"></i>
+                            <%= weather.humidity %>%
+                        </div>
+                        <div class="col-6 text-white">
+                            <i class="bi bi-wind me-1"></i>
+                            <%= weather.windSpeed %> m/s
+                        </div>
+                    </div>
+                </div>
                 <% } %>
             </div>
         </div>
     </div>
 </section>
 
+
 <!-- Main Content -->
 <div class="container py-5">
 
-    <!-- Photo Gallery -->
-  <!-- Photo Gallery -->
-    <% if (photos && photos.length > 0) { %>
+    <!-- Photo Gallery Section - ALWAYS SHOWS -->
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
@@ -98,83 +96,72 @@
                 <p class="text-muted mb-0">Beautiful images from <%= destination.name %></p>
             </div>
             <span class="badge bg-primary fs-6">
-                <%= photos.length %> photos
+                <%= (typeof photos !== 'undefined' && photos) ? photos.length : 0 %> photos
             </span>
         </div>
 
-        <!-- DIRECT INLINE FLEX PHOTO GALLERY -->
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0; padding: 0;">
-            <% photos.forEach(function(photo, index) { %>
-            <div style="flex: 0 0 calc(25% - 0.75rem); position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; background: #f8f9fa; height: 250px; min-height: 250px; max-height: 250px;">
-                <div style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+        <% if (typeof photos !== 'undefined' && photos && photos.length > 0) { %>
+            <!-- REAL PHOTOS -->
+            <div class="photo-gallery-grid">
+                <% photos.forEach(function(photo, index) { %>
+                <div class="photo-item">
                     <img src="<%= photo.thumbnail || photo.url %>" 
-                         alt="<%= photo.alt %>" 
-                         style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s ease; cursor: pointer; display: block; opacity: 1;"
-                         data-bs-toggle="modal"
-                         data-bs-target="#photoModal<%= index %>"
+                         alt="<%= photo.alt || 'Photo ' + (index + 1) %>" 
+                         class="photo-image"
                          loading="lazy"
-                         onerror="this.src='https://via.placeholder.com/200x150/6c757d/ffffff?text=Photo+Unavailable'; this.style.opacity='0.8';"
-                         onmouseover="this.style.transform='scale(1.05)'"
-                         onmouseout="this.style.transform='scale(1)'">
+                         onerror="this.src='https://via.placeholder.com/400x300/6c757d/ffffff?text=Image+Not+Available'">
                     
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;"
-                         onmouseover="this.style.opacity='1'"
-                         onmouseout="this.style.opacity='0'">
-                        <button class="btn btn-light btn-sm" 
-                                style="border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 16px;"
+                    <div class="photo-overlay">
+                        <button class="btn photo-expand-btn" 
                                 data-bs-toggle="modal" 
-                                data-bs-target="#photoModal<%= index %>">
+                                data-bs-target="#photoModal<%= index %>"
+                                type="button">
                             <i class="bi bi-arrows-fullscreen"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Modal -->
                 <div class="modal fade photo-modal" id="photoModal<%= index %>" tabindex="-1">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header border-0">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <div class="modal-header">
+                                <h5 class="modal-title text-white"><%= photo.alt || destination.name + ' - Photo ' + (index + 1) %></h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                             </div>
-                            <div class="modal-body p-0">
-                                <img src="<%= photo.url %>" alt="<%= photo.alt %>" class="modal-image">
+                            <div class="modal-body">
+                                <img src="<%= photo.url %>" 
+                                     alt="<%= photo.alt || 'Photo ' + (index + 1) %>" 
+                                     class="modal-image">
                             </div>
                         </div>
                     </div>
                 </div>
+                <% }); %>
             </div>
-            <% }); %>
-        </div>
-
-        <!-- Add responsive styles with media queries -->
-        <style>
-        @media (max-width: 1200px) {
-            .photo-gallery-inline > div {
-                flex: 0 0 calc(33.333% - 0.67rem) !important;
-            }
-        }
-        @media (max-width: 768px) {
-            .photo-gallery-inline > div {
-                flex: 0 0 calc(50% - 0.5rem) !important;
-                height: 120px !important;
-                min-height: 120px !important;
-                max-height: 120px !important;
-            }
-        }
-        @media (max-width: 576px) {
-            .photo-gallery-inline > div {
-                flex: 0 0 calc(50% - 0.5rem) !important;
-                height: 100px !important;
-                min-height: 100px !important;
-                max-height: 100px !important;
-            }
-        }
-        </style>
+        <% } else { %>
+            <!-- FALLBACK: Sample photos when no data -->
+            <div class="alert alert-info mb-4">
+                <i class="bi bi-info-circle me-2"></i>
+                No photo data received from backend. Showing sample images:
+            </div>
+            <div class="photo-gallery-grid">
+                <% for(let i = 1; i <= 6; i++) { %>
+                <div class="photo-item">
+                    <img src="https://picsum.photos/400/300?random=<%= i %>" 
+                         alt="Sample Photo <%= i %>" 
+                         class="photo-image">
+                    <div class="photo-overlay">
+                        <button class="btn photo-expand-btn" type="button">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </button>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        <% } %>
     </section>
-    <% } %>
 
-    <!-- Famous Places (WITHOUT IMAGES) -->
-    <% if (famousPlaces && famousPlaces.length > 0) { %>
+    <!-- Famous Places Section - ALWAYS SHOWS -->
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
@@ -182,103 +169,134 @@
                 <p class="text-muted mb-0">Must-visit places in <%= destination.name %></p>
             </div>
             <span class="badge bg-primary fs-6">
-                <%= famousPlaces.length %> places
+                <%= (typeof famousPlaces !== 'undefined' && famousPlaces) ? famousPlaces.length : 0 %> places
             </span>
         </div>
 
-        <div class="row g-4">
-            <% famousPlaces.forEach(function(place) { %>
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm attraction-card">
-                    <!-- REMOVED: Image section -->
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h5 class="card-title mb-0"><%= place.name %></h5>
-                            <% if(place.category){ %>
-                            <span class="badge bg-primary ms-2"><%= place.category %></span>
-                            <% } %>
-                        </div>
-                        
-                        <% if(place.rating){ %>
-                        <div class="mb-3">
-                            <% for(let i=1;i<=5;i++){ %>
-                                <% if(i <= Math.round(place.rating)){ %>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                <% } else { %>
-                                    <i class="bi bi-star text-warning"></i>
-                                <% } %>
-                            <% } %>
-                            <span class="text-muted ms-2">(<%= place.rating %>)</span>
-                        </div>
-                        <% } %>
-                        
-                        <% if(place.description){ %>
-                        <p class="card-text text-muted mb-3"><%= place.description %></p>
-                        <% } %>
-                        
-                        <% if(place.address){ %>
-                        <p class="text-muted small mb-3">
-                            <i class="bi bi-geo-alt me-2"></i>
-                            <%= place.address %>
-                        </p>
-                        <% } %>
-
-                        <div class="mt-auto">
-                            <div class="d-flex flex-wrap gap-3 mb-3">
-                                <% if(place.openingHours){ %>
-                                <small class="text-muted">
-                                    <i class="bi bi-clock me-1"></i>
-                                    <%= place.openingHours %>
-                                </small>
-                                <% } %>
-                                <% if(place.ticketPrice){ %>
-                                <small class="text-success fw-semibold">
-                                    <i class="bi bi-ticket me-1"></i>
-                                    <%= place.ticketPrice %>
-                                </small>
+        <% if (typeof famousPlaces !== 'undefined' && famousPlaces && famousPlaces.length > 0) { %>
+            <!-- REAL ATTRACTIONS -->
+            <div class="row g-4">
+                <% famousPlaces.forEach(function(place) { %>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card attraction-card shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h5 class="card-title flex-grow-1 mb-0"><%= place.name %></h5>
+                                <% if (place.category) { %>
+                                <span class="badge bg-primary ms-2 flex-shrink-0"><%= place.category %></span>
                                 <% } %>
                             </div>
+                            
+                            <% if (place.rating) { %>
+                            <div class="mb-3">
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                <i class="bi bi-star<%= i <= Math.round(place.rating) ? '-fill' : '' %> text-warning"></i>
+                                <% } %>
+                                <span class="text-muted ms-2">(<%= place.rating %>)</span>
+                            </div>
+                            <% } %>
+                            
+                            <% if (place.description) { %>
+                            <p class="card-text text-muted mb-3 flex-grow-1"><%= place.description %></p>
+                            <% } %>
+                            
+                            <% if (place.address) { %>
+                            <p class="text-muted small mb-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                <%= place.address %>
+                            </p>
+                            <% } %>
 
-                            <div class="d-flex gap-2">
-                                <% if(place.coordinates){ %>
-                                <a href="https://www.google.com/maps/search/?api=1&query=<%= place.coordinates.lat %>,<%= place.coordinates.lng %>" 
-                                   target="_blank" 
-                                   class="btn btn-outline-primary btn-sm flex-fill">
-                                    <i class="bi bi-map me-1"></i> Map
-                                </a>
+                            <div class="mt-auto">
+                                <% if (place.openingHours || place.ticketPrice) { %>
+                                <div class="d-flex flex-wrap gap-3 mb-3">
+                                    <% if (place.openingHours) { %>
+                                    <small class="text-muted">
+                                        <i class="bi bi-clock me-1"></i>
+                                        <%= place.openingHours %>
+                                    </small>
+                                    <% } %>
+                                    <% if (place.ticketPrice) { %>
+                                    <small class="text-success fw-semibold">
+                                        <i class="bi bi-ticket me-1"></i>
+                                        <%= place.ticketPrice %>
+                                    </small>
+                                    <% } %>
+                                </div>
                                 <% } %>
-                                
-                                <% if(place.website){ %>
-                                <a href="<%= place.website %>" 
-                                   target="_blank" 
-                                   class="btn btn-outline-secondary btn-sm flex-fill">
-                                    <i class="bi bi-globe me-1"></i> Website
-                                </a>
-                                <% } %>
+
+                                <div class="d-flex gap-2">
+                                    <% if (place.coordinates) { %>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=<%= place.coordinates.lat %>,<%= place.coordinates.lng %>" 
+                                       target="_blank" 
+                                       class="btn btn-outline-primary btn-sm flex-fill">
+                                        <i class="bi bi-map me-1"></i> Map
+                                    </a>
+                                    <% } %>
+                                    
+                                    <% if (place.website) { %>
+                                    <a href="<%= place.website %>" 
+                                       target="_blank" 
+                                       class="btn btn-outline-secondary btn-sm flex-fill">
+                                        <i class="bi bi-globe me-1"></i> Website
+                                    </a>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <% }); %>
             </div>
-            <% }); %>
-        </div>
+        <% } else { %>
+            <!-- FALLBACK: Sample attractions when no data -->
+            <div class="alert alert-info mb-4">
+                <i class="bi bi-info-circle me-2"></i>
+                No attraction data received from backend. Showing sample attractions:
+            </div>
+            <div class="row g-4">
+                <% for(let i = 1; i <= 3; i++) { %>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card attraction-card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Sample Attraction <%= i %></h5>
+                            <div class="mb-3">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star text-warning"></i>
+                                <span class="text-muted ms-2">(4.0)</span>
+                            </div>
+                            <p class="card-text text-muted">This is a sample attraction. Your backend needs to pass famousPlaces data.</p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        <% } %>
     </section>
-    <% } %>
 
     <!-- Explore More -->
-    <section class="text-center py-5" style="background-color: var(--secondary-color); border-radius: 16px;">
+    <section class="text-center py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 16px;">
         <h3 class="fw-bold mb-3">Want to explore another destination?</h3>
-        <p class="text-muted mb-4">Search for any city worldwide to get weather, photos, and attractions</p>
+        <p class="text-muted mb-4">Search for any city worldwide</p>
 
         <form action="/search" method="POST" class="d-inline-block">
-            <div class="input-group" style="max-width: 400px;">
-                <input type="text" class="form-control" name="destination" placeholder="Enter city name..." required>
-                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+            <div class="input-group mx-auto" style="max-width: 500px;">
+                <input type="text" 
+                       class="form-control form-control-lg" 
+                       name="destination" 
+                       placeholder="Enter city name..." 
+                       required>
+                <button class="btn btn-primary btn-lg" type="submit">
+                    <i class="bi bi-search me-1"></i> Search
+                </button>
             </div>
         </form>
 
         <div class="mt-4">
-            <a href="/" class="btn btn-outline-primary me-2">
+            <a href="/" class="btn btn-outline-primary">
                 <i class="bi bi-house me-1"></i> Back to Home
             </a>
         </div>
