@@ -78,23 +78,17 @@ This project requires API keys from OpenWeatherMap and Unsplash to function corr
 2.  Add your API keys to the `.env` file as shown in the example below.
 
 **`.env.example`**
+OpenWeatherMap API Key
+API_KEY_WEATHER=[Your_OpenWeatherMap_API_Key]
 
+Unsplash API Key
+API_KEY_UNSPLASH=[Your_Unsplash_Access_Key]
 
-# OpenWeatherMap API Key
-
-API\_KEY\_WEATHER=[Your\_OpenWeatherMap\_API\_Key]
-
-# Unsplash API Key
-
-API\_KEY\_UNSPLASH=[Your\_Unsplash\_Access\_Key]
-
-# Port for the server to run on
-
+Port for the server to run on
 PORT=3000
 
 
-
-
+---
 
 ## 🙏 Acknowledgments
 
@@ -106,5 +100,5 @@ PORT=3000
 **Connect with me:**
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhruvdwivedi0001)
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DhruvDwivedi1)
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Dhruvb-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DhruvDwivedi1)
 ```
