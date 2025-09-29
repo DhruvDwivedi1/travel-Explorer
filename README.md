@@ -1,8 +1,3 @@
-Of course. Here is the complete `README.md` file for your "Travel Explorer" project, ready for you to copy and paste.
-
------
-
-````markdown
 # Travel Explorer ✈️
 
 ![Travel Explorer Screenshot](./assets/appSS.png)
@@ -83,7 +78,7 @@ This project requires API keys from OpenWeatherMap and Unsplash to function corr
 2.  Add your API keys to the `.env` file as shown in the example below.
 
 **`.env.example`**
-````
+
 
 # OpenWeatherMap API Key
 
@@ -97,9 +92,9 @@ API\_KEY\_UNSPLASH=[Your\_Unsplash\_Access\_Key]
 
 PORT=3000
 
-```
 
----
+
+
 
 ## 🙏 Acknowledgments
 
