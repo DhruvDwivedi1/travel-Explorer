@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <%- include('../partials/navbar') %>
+    
+    <!-- Location Alert (Hidden by default) -->
+    <div id="locationAlert" class="alert location-alert d-none" role="alert">
+        <div class="d-flex align-items-center">
+            <i id="alertIcon" class="me-2"></i>
+            <div>
+                <strong id="alertTitle"></strong>
+                <div id="alertMessage"></div>
+            </div>
+            <button type="button" class="btn-close ms-auto" onclick="hideLocationAlert()"></button>
+        </div>
+    </div>
+
+    <!-- World Map Indicator (Hidden by default) -->
+    <div id="worldMapIndicator" class="world-map-indicator d-none" title="View on world map">
+        <i class="bi bi-globe fs-4"></i>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+        <%- body %>
+    </main>
+
+    <%- include('../partials/footer') %>
+    <%- include('../partials/scripts') %>
+</body>
+</html>

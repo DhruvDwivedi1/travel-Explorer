@@ -1,0 +1,43 @@
+{
+  "name": "travel-explorer",
+  "version": "1.0.0",
+  "description": "A travel exploration website with real-time weather, photos, and interactive maps",
+  "main": "server.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "travel",
+    "weather",
+    "maps",
+    "destinations",
+    "express",
+    "ejs"
+  ],
+  "author": "Travel Explorer Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/travel-explorer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/travel-explorer/issues"
+  },
+  "homepage": "https://github.com/yourusername/travel-explorer#readme"
+}

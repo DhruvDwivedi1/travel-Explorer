@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">
+            <i class="bi bi-airplane me-2"></i>
+            Travel Explorer
+        </a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        <i class="bi bi-house me-1"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="focusSearchInput()">
+                        <i class="bi bi-search me-1"></i>
+                        Search
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-geo-alt me-1"></i>
+                        Popular Destinations
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li><a class="dropdown-item" href="/destination/paris">
+                            <i class="bi bi-geo me-2 text-muted"></i>
+                            Paris, France
+                        </a></li>
+                        <li><a class="dropdown-item" href="/destination/tokyo">
+                            <i class="bi bi-geo me-2 text-muted"></i>
+                            Tokyo, Japan
+                        </a></li>
+                        <li><a class="dropdown-item" href="/destination/london">
+                            <i class="bi bi-geo me-2 text-muted"></i>
+                            London, England
+                        </a></li>
+                        <li><a class="dropdown-item" href="/destination/new-york">
+                            <i class="bi bi-geo me-2 text-muted"></i>
+                            New York, USA
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/" onclick="focusSearchInput()">
+                            <i class="bi bi-search me-2 text-primary"></i>
+                            Search More Destinations...
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

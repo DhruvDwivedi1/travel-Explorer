@@ -1,0 +1,70 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            <div class="error-illustration mb-4">
+                <i class="bi bi-exclamation-triangle display-1 text-warning"></i>
+            </div>
+            
+            <h1 class="display-4 fw-bold mb-3">Oops!</h1>
+            <h2 class="h4 text-muted mb-4">Something went wrong</h2>
+            
+            <p class="lead mb-4">
+                <%= message || 'We encountered an unexpected error while processing your request.' %>
+            </p>
+            
+            <% if (locals.error && process.env.NODE_ENV === 'development') { %>
+                <div class="alert alert-danger text-start mb-4">
+                    <h6 class="fw-bold">Debug Information:</h6>
+                    <pre class="mb-0"><%= error.stack || error.message || error %></pre>
+                </div>
+            <% } %>
+            
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="/" class="btn btn-primary btn-lg">
+                    <i class="bi bi-house me-2"></i>
+                    Go Home
+                </a>
+                <button onclick="window.history.back()" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Go Back
+                </button>
+                <button onclick="window.location.reload()" class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-arrow-clockwise me-2"></i>
+                    Try Again
+                </button>
+            </div>
+            
+            <hr class="my-5">
+            
+            <div class="text-muted">
+                <h6 class="fw-semibold mb-3">Popular Destinations</h6>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <a href="/destination/paris" class="btn btn-outline-primary btn-sm">Paris</a>
+                    <a href="/destination/london" class="btn btn-outline-primary btn-sm">London</a>
+                    <a href="/destination/tokyo" class="btn btn-outline-primary btn-sm">Tokyo</a>
+                    <a href="/destination/new-york" class="btn btn-outline-primary btn-sm">New York</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-illustration {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+</style>
